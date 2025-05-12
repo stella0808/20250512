@@ -46,12 +46,16 @@ function draw() {
     let keypoints = predictions[0].scaledMesh;
 
     // 嘴唇的特徵點
-    let mouthPoints = [409,270,269,267,0,37,39,40,185,61,146,91,181,84,17,314,405,321,375,291];
+    let mouthPoints = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146];
     drawFeature(keypoints, mouthPoints, color(0, 0, 255)); // 藍色線條
 
     // 左眼的特徵點
     let leftEyePoints = [243, 190, 56, 28, 27, 29, 30, 247, 130, 25, 110, 24, 23, 22, 26, 112];
     drawFeature(keypoints, leftEyePoints, color(255, 255, 0)); // 黃色線條
+
+    // 右眼的特徵點
+    let rightEyePoints = [359, 467, 260, 259, 257, 258, 286, 414, 463, 341, 256, 252, 253, 254, 339, 255];
+    drawFeature(keypoints, rightEyePoints, color(0, 255, 0)); // 綠色線條
   }
 }
 
