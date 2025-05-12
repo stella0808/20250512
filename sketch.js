@@ -3,7 +3,7 @@ let video;
 let predictions = [];
 
 function setup() {
-  createCanvas(windowWidth, windowHeight); // 畫布大小設置為螢幕大小
+  createCanvas(640,480); // 畫布大小設置為螢幕大小
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
