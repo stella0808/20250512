@@ -26,17 +26,21 @@ function draw() {
   let videoAspect = video.width / video.height;
   let canvasAspect = width / height;
 
-  let drawWidth, drawHeight;
+  let drawWidth, drawHeight, offsetX, offsetY;
   if (videoAspect > canvasAspect) {
     drawWidth = width;
     drawHeight = width / videoAspect;
+    offsetX = 0;
+    offsetY = (height - drawHeight) / 2; // 垂直居中
   } else {
     drawHeight = height;
     drawWidth = height * videoAspect;
+    offsetX = (width - drawWidth) / 2; // 水平居中
+    offsetY = 0;
   }
 
-  // 繪製影像，保持比例
-  image(video, 0, 0, drawWidth, drawHeight);
+  // 繪製影像，保持比例並居中
+  image(video, offsetX, offsetY, drawWidth, drawHeight);
 
   if (predictions.length > 0) {
     let keypoints = predictions[0].scaledMesh;
@@ -56,11 +60,8 @@ function draw() {
       let [x, y] = keypoints[index];
 
       // 映射特徵點到畫布大小
-      x = map(x, 0, video.width, 0, drawWidth);
-      y = map(y, 0, video.height, 0, drawHeight);
-
-      // 如果畫布有翻轉，調整 X 座標
-      x = width - x;
+      x = map(x, 0, video.width, offsetX, offsetX + drawWidth);
+      y = map(y, 0, video.height, offsetY, offsetY + drawHeight);
 
       vertex(x, y);
     }
