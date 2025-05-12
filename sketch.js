@@ -46,7 +46,7 @@ function draw() {
     let keypoints = predictions[0].scaledMesh;
 
     // 嘴唇的特徵點
-    let mouthPoints = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146];
+    let mouthPoints = [409,270,269,267,0,37,39,40,185,61,146,91,181,84,17,314,405,321,375,291];
     drawFeature(keypoints, mouthPoints, color(0, 0, 255)); // 藍色線條
 
     // 左眼的特徵點
