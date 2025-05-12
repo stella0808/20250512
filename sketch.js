@@ -35,21 +35,14 @@ function draw() {
     drawWidth = height * videoAspect;
   }
 
-  // 反轉畫布的 X 軸
-  push(); // 儲存當前繪圖狀態
-  translate(width, 0); // 將畫布平移到右側
-  scale(-1, 1); // 水平翻轉畫布
-
   // 繪製影像，保持比例
   image(video, 0, 0, drawWidth, drawHeight);
-
-  pop(); // 恢復繪圖狀態
 
   if (predictions.length > 0) {
     let keypoints = predictions[0].scaledMesh;
 
     // 嘴唇的特徵點
-    let points = [409, 270, 269, 267, 0, 37, 39, 40, 185, 61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291];
+    let points = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146];
 
     // 設定線條樣式
     stroke(0, 0, 255); // 藍色
@@ -66,7 +59,7 @@ function draw() {
       x = map(x, 0, video.width, 0, drawWidth);
       y = map(y, 0, video.height, 0, drawHeight);
 
-      // 反轉 X 座標
+      // 如果畫布有翻轉，調整 X 座標
       x = width - x;
 
       vertex(x, y);
