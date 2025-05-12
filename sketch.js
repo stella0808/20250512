@@ -3,7 +3,7 @@ let video;
 let predictions = [];
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(windowWidth, windowHeight); // 畫布大小設置為螢幕大小
   video = createCapture(VIDEO);
   video.size(width, height);
   video.hide();
@@ -67,4 +67,8 @@ function draw() {
     }
     endShape(CLOSE); // 將最後一點與第一點連接
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight); // 當螢幕大小改變時調整畫布
 }
