@@ -46,27 +46,33 @@ function draw() {
     let keypoints = predictions[0].scaledMesh;
 
     // 嘴唇的特徵點
-    let points = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146];
+    let mouthPoints = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291, 375, 321, 405, 314, 17, 84, 181, 91, 146];
+    drawFeature(keypoints, mouthPoints, color(0, 0, 255)); // 藍色線條
 
-    // 設定線條樣式
-    stroke(0, 0, 255); // 藍色
-    strokeWeight(5);
-    noFill();
-
-    // 畫線將所有點串接在一起
-    beginShape();
-    for (let i = 0; i < points.length; i++) {
-      let index = points[i];
-      let [x, y] = keypoints[index];
-
-      // 映射特徵點到畫布大小
-      x = map(x, 0, video.width, offsetX, offsetX + drawWidth);
-      y = map(y, 0, video.height, offsetY, offsetY + drawHeight);
-
-      vertex(x, y);
-    }
-    endShape(CLOSE); // 將最後一點與第一點連接
+    // 左眼的特徵點
+    let leftEyePoints = [243, 190, 56, 28, 27, 29, 30, 247, 130, 25, 110, 24, 23, 22, 26, 112];
+    drawFeature(keypoints, leftEyePoints, color(255, 255, 0)); // 黃色線條
   }
+}
+
+// 繪製特徵點的通用函數
+function drawFeature(keypoints, points, strokeColor) {
+  stroke(strokeColor); // 設定線條顏色
+  strokeWeight(5);
+  noFill();
+
+  beginShape();
+  for (let i = 0; i < points.length; i++) {
+    let index = points[i];
+    let [x, y] = keypoints[index];
+
+    // 映射特徵點到畫布大小
+    x = map(x, 0, video.width, offsetX, offsetX + drawWidth);
+    y = map(y, 0, video.height, offsetY, offsetY + drawHeight);
+
+    vertex(x, y);
+  }
+  endShape(CLOSE); // 將最後一點與第一點連接
 }
 
 function windowResized() {
